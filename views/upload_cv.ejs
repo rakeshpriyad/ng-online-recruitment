@@ -1,0 +1,28 @@
+<%- include layouts/header.ejs %>
+
+        <div class="page-data">
+            <% 
+			if ( typeof message !== 'undefined' && message )  { %>
+			File uploaded successfully
+			<% } %> 
+			
+			
+            <form ref='uploadForm' 
+      id='uploadForm' 
+      action='/candidates/upload' 
+      method='post' 
+      encType="multipart/form-data">
+                <table cellpadding="11">
+               <tr>
+                    <td class="label">Upload CV</td>
+					<td> 
+						<input type="file" name="sampleFile" />
+						<input type='submit' value='Upload!' />
+				    </td>
+                 </tr>
+                </table>
+            </form>
+            
+        </div>
+        
+<%- include layouts/footer.ejs %>
