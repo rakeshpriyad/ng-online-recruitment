@@ -19,7 +19,7 @@ function ScheduleListController ($scope, $http)
             function(data, status, headers, config)
             {
 
-                $scope.schedules = data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
+                $scope.schedules = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
 
                 if ( $scope.total == undefined )
                 {
@@ -78,3 +78,32 @@ $scope.loadPage = function (pg)
 
 }
 
+function EditScheduleController($scope, $http,$location,$routeParams) {
+
+    var schedule = {schedule_name:"", address:"", company_name:"",candidate_name:"",contact_person:""};
+    
+    $scope.schedule = schedule;
+    $scope.action = "Edit" ;
+
+    console.log ( " ID of the schedule is " + $routeParams.id) ;
+
+
+    $http.get('/schedules/get/' + $routeParams.id).
+    success(
+    function(data, status, headers, config) {
+       $scope.schedule = data;
+    });
+
+
+    $scope.save = function()
+    {
+
+         $http.post('/schedules/edit/' + $routeParams.id, $scope.schedule).
+          success(
+            function(data) {
+            $location.url('http://localhost:4300/#/listSchedules');
+        });
+    }
+
+    
+}

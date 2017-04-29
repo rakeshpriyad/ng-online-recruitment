@@ -1,0 +1,37 @@
+<div ng-include="'header.html'"></div>
+<div id="wrapper">
+<div style="margin-left:10%;margin-top:5%;">
+ <div id="wrapper">   
+ <div class="page-data">
+            
+                <table cellpadding="11">
+                <tr>
+                    <td>Schedule Name</td><td>: <input type="text" name="schedule_name" data-ng-model="schedule.schedule_name" required></td>
+                 </tr>
+                 <tr>
+                    <td valign="top">Address</td>
+                    <td valign="top">: 
+                        <textarea name="address" required cols="30" rows="5" data-ng-model="schedule.address"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Company Name</td><td>: <input type="text" data-ng-model="schedule.company_name" name="company_name" required></td>
+                 </tr>
+                  <tr>
+                    <td>Candidate Name</td><td>: <input type="text" data-ng-model="schedule.candidate_name"  name="candidate_name" required></td>
+                 </tr>
+				 <tr>
+                    <td>Contact Name</td><td>: <input type="text" data-ng-model="schedule.contact_person"  name="contact_person" required></td>
+                 </tr>
+                 <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" ng-click="save()" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                </table>
+        </div>
+ </div>
+</div>
+</div>

@@ -108,7 +108,7 @@ CompanyProvider = function(host, port) {
 				cb(error, null);
 			} else {
 				companies.update({_id:companies.db.bson_serializer.ObjectID.createFromHexString(company._id)},
-					{company_name:company.company_name, address:company.address, email:company.email},
+					{company_name : company.company_name,address : company.address,email: company.email,phone : company.phone,contact_person: company.contact_person},
 					function(error, result) {
 						cb(error, result);
 				});

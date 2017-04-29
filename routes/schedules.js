@@ -28,13 +28,7 @@ exports.list = function(req, res){
 		//totalSchedules = schedules.length;
 		res.send(schedules);
 	});
-	/*scheduleProvider.fetchAllSchedules(currentPage,function(error, schedules) {
-			//res.render('schedules',{page_title:"Schedules ",data:schedules});
-			 
-			//pageCount = Math.floor((totalSchedules/pageSize));
-					
-			//res.render('schedules',{page_title:"Schedule Information ",data:schedules,pageSize : pageSize, totalSchedules : totalSchedules,pageCount: pageCount,currentPage: currentPage});
-	});*/
+	
 };
 
 
@@ -112,7 +106,7 @@ exports.save_edit = function(req,res){
             _id     		 : id,
             schedule_name    : input.schedule_name,
             address 		 : input.address,
-            schedule_name     : input.schedule_name,
+            company_name     : input.company_name,
             candidate_name   : input.candidate_name,
 			contact_person   : input.contact_person
 
@@ -125,7 +119,7 @@ exports.save_edit = function(req,res){
 				if (error)
 					console.log("Error Updating : %s ",err );
 
-				res.redirect('/schedules');
+				//res.redirect('/#listSchedules');
 
 			});
 
@@ -140,7 +134,7 @@ exports.delete_schedule = function(req,res){
 			if (error) {
 				res.send(error, 404);
 			} else {
-				res.redirect('/schedules');
+				res.redirect('/#listSchedules');
 			}
 		});
 

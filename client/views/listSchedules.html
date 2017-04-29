@@ -32,7 +32,7 @@
                     <td>&nbsp;</td>
                     <td width="10%">&nbsp;</td>
                     <td width="50%" align="right">
-                    <form method="POST" action="/candidates/find">Client Name <input type="text" name="candidate_name" >  <input type="submit" value="Search"/> </form>
+                    <form method="POST" action="/candidates/find">Schedule Name <input type="text" name="schedule_name" >  <input type="submit" value="Search"/> </form>
                     </td>
                   </tr>
                 </table>
@@ -60,9 +60,9 @@
                 <td>{{ schedule.candidate_name }}</td>
                 <td>{{ schedule.contact_person }}</td>
                 <td>
-                        <a class="a-inside edit" href="../candidates/edit/{{ c._id }}">Edit</a>
+                        <a class="a-inside edit" href="#editSchedule/{{ schedule._id }}">Edit</a>
 
-                        <a class="a-inside delete" href="../candidates/delete/{{ c._id }}">Delete</a>
+                        <a class="a-inside delete" href="/schedules/delete/{{ schedule._id }}">Delete</a>
 
                     </td>
               </tr>

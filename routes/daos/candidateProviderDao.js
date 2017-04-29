@@ -68,8 +68,16 @@ CandidateProvider = function(host, port) {
 				cb(error, null);
 			} else {
 				candidates.update({_id:candidates.db.bson_serializer.ObjectID.createFromHexString(candidate._id)},
-					{candidate_name:candidate.candidate_name, address:candidate.address, email:candidate.email,phone:candidate.phone},
-					function(error, result) {
+					{           
+						candidate_name    : candidate.candidate_name,
+						qualification	  : candidate.qualification,
+						skills			  : candidate.skills,
+						address 		  : candidate.address,
+						email   		  : candidate.email,
+						phone   		  : candidate.phone,
+						contact_person    : candidate.contact_person
+
+					},function(error, result) {
 						cb(error, result);
 				});
 			}

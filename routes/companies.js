@@ -17,22 +17,11 @@ var companyProvider =  getCompanyProvider();
  * GET companies listing.
  */
 exports.list = function(req, res){
-	var currentPage = req.params.page;
-		  if ( typeof currentPage == 'undefined' )  {
-				currentPage =1;
-			}
-
-			var totalCompanies = 0;
+	
 	companyProvider.fetchTotalCompanies(function(error, companies) {
-		totalCompanies = companies.length;
+		res.send(companies);
     });
-	companyProvider.fetchAllCompanies(currentPage,function(error, companies) {
-			//res.render('companies',{page_title:"Companies ",data:companies});
-			
-			pageCount = Math.floor(totalCompanies/pageSize);
-			//res.render('companies',{page_title:"Company Information ",data:companies,pageSize: pageSize,	totalCompanies: totalCompanies,pageCount: pageCount,currentPage: currentPage});
-			res.send(companies);
-	});
+	
 };
 
  
@@ -112,15 +101,17 @@ exports.save_edit = function(req,res){
     var input = JSON.parse(JSON.stringify(req.body));
 		var id = req.params.id;
 		var companies = {
-            _id     : id,
-            name    : input.name,
-            address : input.address,
-            email   : input.email,
-            phone   : input.phone
+            _id     		: id,
+            company_name    : input.company_name,
+            address 		: input.address,
+            email   		: input.email,
+            phone   		: input.phone,
+			contact_person  : input.contact_person
+
 
         };
     console.log("Update Updating : %s ",id);
-		console.log("Update Updating : %s ",input.name);
+    console.log("Update Updating : %s ",input.company_name);
 
 			companyProvider.updateCompany(companies, function(error, cs) {
 				console.log(" Updating : %s ",JSON.stringify(req.body) );
@@ -142,7 +133,7 @@ exports.delete_company = function(req,res){
 			if (error) {
 				res.send(error, 404);
 			} else {
-				res.redirect('/companies');
+				res.redirect('/#listCompanies');
 			}
 		});
 

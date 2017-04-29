@@ -80,12 +80,16 @@ $scope.loadPage = function (pg)
 
 function EditCompanyController($scope, $http,$location,$routeParams) {
 
+    
+      
+
     var company =
-    {
-        company_name: "",
-        address: "",
-        email: "",
-        phone: ""
+    {      
+            company_name    : "",
+            address 		: "",
+            email   		: "",
+            phone   		: "",
+			contact_person  : ""
     }
 
     $scope.company = company;

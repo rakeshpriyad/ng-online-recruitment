@@ -103,11 +103,12 @@ exports.save_edit = function(req,res){
 		var candidates = {
             _id     		  : id,
             candidate_name    : input.candidate_name,
-			qualification	  : input.candidate_name,
+			qualification	  : input.qualification,
 			skills			  : input.skills,
             address 		  : input.address,
             email   		  : input.email,
-            phone   		  : input.phone
+            phone   		  : input.phone,
+			contact_person    : input.contact_person
 
         };
     console.log("Update : %s ",id);
@@ -134,7 +135,7 @@ exports.delete_candidate = function(req,res){
 			if (error) {
 				res.send(error, 404);
 			} else {
-				res.redirect('/candidates');
+				res.redirect('/#listCandidates');
 			}
 		});
 
@@ -156,7 +157,7 @@ exports.cv_upload = function(req, res){
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/../client/uploads/' + file.name;
+        file.path = __dirname + '/../uploads/' + file.name;
     });
 
     form.on('file', function (name, file){

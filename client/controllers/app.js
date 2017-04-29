@@ -10,6 +10,9 @@ OnlineRecApp.config(function($routeProvider, $locationProvider) {
     .when("/editCompany/:id", {controller:EditCompanyController,
         templateUrl : '/views/editCompany.html'
     })
+    /*.when("/deleteCompany/:id", {
+        templateUrl : '/views/deleteCompany.html'
+    })*/
     .when("/listCandidates", {controller:CandidateListController,     templateUrl : '/views/listCandidates.html'
     })
     .when("/addCandidate", {
@@ -24,7 +27,7 @@ OnlineRecApp.config(function($routeProvider, $locationProvider) {
     .when("/addSchedule", {
         templateUrl : '/views/addSchedule.html'
     })
-    .when("/editSchedule", {
+    .when("/editSchedule/:id", {controller:EditScheduleController,
         templateUrl : '/views/editSchedule.html'
     })
     .when("/upload", {controller:CVUploadController,

@@ -67,15 +67,18 @@ app.get('/candidates/find/:page/:candidate_name', candidates.find);
 
 
 app.get('/schedules/add', schedules.add);
+app.get('/schedules/get/:id', schedules.get);
 app.post('/schedules/add', schedules.save);
 app.get('/schedules/edit/:id', schedules.edit);
-
+app.post('/schedules/edit/:id',schedules.save_edit);
 
 app.get('/schedules', schedules.list);
 app.get('/schedules/:page', schedules.list);
 
 app.post('/schedules/find', schedules.find);
 app.get('/schedules/find/:page/:schedule_name', schedules.find);
+app.get('/schedules/delete/:id', schedules.delete_schedule);
+
 var clientDir = path.join(__dirname, 'client')
 
 app.get('/companiesList', function(req, res) {

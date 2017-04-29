@@ -90,7 +90,7 @@ ScheduleProvider = function(host, port) {
 				cb(error, null);
 			} else {
 				schedules.update({_id:schedules.db.bson_serializer.ObjectID.createFromHexString(schedule._id)},
-					{schedule_name:schedule.schedule_name, address:schedule.address, company_name:schedule.company_name,candidate_name:schedule.candidate_name},
+					{schedule_name:schedule.schedule_name, address:schedule.address, company_name:schedule.company_name,candidate_name:schedule.candidate_name,contact_person:schedule.contact_person},
 					function(error, result) {
 						cb(error, result);
 				});
