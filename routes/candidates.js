@@ -1,7 +1,6 @@
 
 
-//const expressFileUpload = require('express-fileupload');
-//var fileUpload = expressFileUpload();
+
 var formidable = require('formidable');
 var pageSize = 2,
 	pageCount = 10/2,
@@ -104,20 +103,23 @@ exports.save_edit = function(req,res){
 		var candidates = {
             _id     		  : id,
             candidate_name    : input.candidate_name,
+			qualification	  : input.candidate_name,
+			skills			  : input.skills,
             address 		  : input.address,
             email   		  : input.email,
             phone   		  : input.phone
 
         };
     console.log("Update : %s ",id);
-	console.log("Update  : %s ",input.candidate_name);
+	console.log("Updating : %s ",JSON.stringify(candidates));
 
 			candidateProvider.updateCandidate(candidates, function(error, cs) {
-				console.log("Error Updating : %s ",req.body );
+				//console.log("Updating : %s ",input);
 				if (error)
 					console.log("Error Updating : %s ",err );
 
-				res.redirect('/candidates');
+				//res.redirect('/candidates');
+				console.log("Updated successfully");
 
 			});
 
@@ -141,6 +143,11 @@ exports.delete_candidate = function(req,res){
 exports.upload = function(req, res){
   res.render('upload_cv',{page_title:"Upload CV "});
 };
+exports.download = function(req, res){
+
+  res.send({dir: __dirname + '/../uploads'});
+};
+
 
 
 exports.cv_upload = function(req, res){
@@ -149,16 +156,15 @@ exports.cv_upload = function(req, res){
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/uploads/' + file.name;
+        file.path = __dirname + '/../client/uploads/' + file.name;
     });
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
     });
-
-
-    //res.sendfile('./public/upload_cv.html');
-	//res.status(200).redirect('/candidates',{code: 'success', message:'Valid'});
-	//res.status(200).send({code: 'success', message:'Uploaded'});
-	res.render('upload_cv',{page_title:"Candidates File Upload ",message:'Uploaded'});
+	var path = require('path');
+	var clientDir = path.join(__dirname, '/../client')
+    console.log("File Successfully uploaded!");
+	
+	 res.sendfile(path.join(clientDir, 'upload_success.html'))
 };

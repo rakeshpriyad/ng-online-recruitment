@@ -1,96 +1,34 @@
-<div class="row-fluid">
-
-<form class="form-horizontal span12">
-
-<fieldset>
-
-	<legend>
-		Online Recruitment
-	</legend>
-
-     <br/>
-
-            <div class="row">
-                <div class="span8">
-
-                    <div class="control-group">
-                        <label class="control-label">Name:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.name" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Year:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.year" type="text">
-                            <span class="help-inline"></span>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Grapes:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.grapes" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Region:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.region" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Country:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.country" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Picture:</label>
-
-                        <div class="controls">
-                            <input type="file" file-Upload multiple/>
-                            <ul>
-                                <li ng-repeat="file in files">{{file.name}}</li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-		       </div>
-
-
-                
-
-
-            </div>
- </fieldset>
-
-
-
-<div class="form-actions">
-    <button class="btn btn-primary save" ng-click="save()">Save</button>
-    <a href="/" class="btn">Cancel</a>
+<div ng-include="'header.html'"></div>
+<div id="wrapper">
+<div style="margin-left:30%;margin-top:5%;">
+ <div class="page-data">
+            
+                <table cellpadding="11">
+                <tr>
+                    <td>Client Name</td><td>: <input type="text" name="name" data-ng-model="company.company_name" required></td>
+                 </tr>
+                 <tr>
+                    <td valign="top">Address</td>
+                    <td valign="top">: 
+                        <textarea name="address" required cols="30" rows="5" data-ng-model="company.address"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td><td>: <input type="text" data-ng-model="company.email" name="email" required></td>
+                 </tr>
+                  <tr>
+                    <td>Phone</td><td>: <input type="text" name="phone" data-ng-model="company.phone" required></td>
+                 </tr>
+                 <tr>
+                    <td >&nbsp;</td>
+                    <td>
+                        <input type="submit" ng-click="save()" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                </table>
+            
+            
+        </div>
 </div>
-
-</form>
-
 </div>

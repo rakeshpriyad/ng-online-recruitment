@@ -1,5 +1,5 @@
 
-function CompanyListController ($scope, $http)
+function CVUploadController ($scope, $http)
 {
 
  //for pagination and searching
@@ -14,12 +14,12 @@ function CompanyListController ($scope, $http)
         }
 
 
-    $http.get('/companies').
+    $http.get('/candidates/upload').
         success(
             function(data, status, headers, config)
             {
 
-                $scope.companies = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
+                $scope.message = data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
 
                 if ( $scope.total == undefined )
                 {
@@ -53,7 +53,7 @@ $scope.loadPage = function (pg)
 
         $scope.offset = pg - 1;
 
-        $http.get('/companies').
+        $http.get('/candidates/upload').
             success(
             function(data, status, headers, config)
             {
@@ -69,7 +69,7 @@ $scope.loadPage = function (pg)
 
                 console.log("The end2 is " + end ) ;
 
-                $scope.companies = data;//data.slice($scope.offset*$scope.limit, end);
+                $scope.message = data.slice($scope.offset*$scope.limit, end);
 
 
            });
@@ -78,37 +78,3 @@ $scope.loadPage = function (pg)
 
 }
 
-function EditCompanyController($scope, $http,$location,$routeParams) {
-
-    var company =
-    {
-        company_name: "",
-        address: "",
-        email: "",
-        phone: ""
-    }
-
-    $scope.company = company;
-    $scope.action = "Edit" ;
-
-    console.log ( " ID of the Companies is " + $routeParams.id) ;
-
-
-    $http.get('/companies/get/' + $routeParams.id).
-    success(
-    function(data, status, headers, config) {
-       $scope.company = data;
-    });
-
-
-    $scope.save = function()
-    {
-
-         $http.post('/companies/edit/' + $routeParams.id, $scope.company).
-          success(
-            function(data) {
-            $location.url('/#/listCompanies');
-        });
-    }
-
-}

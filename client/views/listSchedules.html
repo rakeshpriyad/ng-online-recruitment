@@ -10,20 +10,17 @@
         <script src="/controllers/filters.js"></script>
         <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css" media="screen">
         <link rel="stylesheet" href="/libs/css/style.css" media="screen">
-        
-
-  </head>
-
+    </head>
 <body>
 
-<div ng-app="onlineRecApp" ng-controller="CandidateListController"> 
+<div ng-app="onlineRecApp" ng-controller="ScheduleListController"> 
 
  <div id="wrapper">
             
             <div class="page-container">
-            <div class="page-header bg-img" ><h2>Online Recruitment System</h2></div>
+           
             <div class="data-header-btn">
-             <button>Candidate Information </button>
+             <button>Schedule Information </button>
             </div>
             <div class="page-data">
             <div class="search-info-btn">
@@ -43,23 +40,25 @@
           </div>
           <div class="data-table">
             <table border="1" cellpadding="7" cellspacing="7">
-                <tr>
+                                <tr>
+                    
 					          <th width="50px">ID</th>
-                    <th>Candidate Name</th>
+                    <th>Schedule Name</th>
                     <th>Address</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>Company Name</th>
+                    <th>Candidate Name</th>
                     <th>Contact Person</th>
                     <th width="120px">Action</th>
                 </tr>
 
-              <tr ng-repeat="c in candidates">
-                <td>{{ c._id }}</td>
-                <td>{{ c.candidate_name }}</td>
-                <td>{{ c.qualification }}</td>
-                <td>{{ c.address }}</td>
-                <td>{{ c.email }}</td>
-                <td>{{ c.phone }}</td>
+
+              <tr ng-repeat="schedule in schedules">
+                <td>{{ schedule._id }}</td>
+                <td>{{ schedule.schedule_name }}</td>
+                <td>{{ schedule.address }}</td>
+                <td>{{ schedule.company_name }}</td>
+                <td>{{ schedule.candidate_name }}</td>
+                <td>{{ schedule.contact_person }}</td>
                 <td>
                         <a class="a-inside edit" href="../candidates/edit/{{ c._id }}">Edit</a>
 
@@ -71,18 +70,6 @@
         </div>
 
 </div>
-
-
-
-<script>
-var app = angular.module('candidatesApp', []);
-app.controller('candidatesCtrl', function($scope, $http) {
-  $http.get("/candidates")
-  .then(function(response) {
-      $scope.companies = response.data;
-  });
-});
-</script>
 
 </body>
 </html>

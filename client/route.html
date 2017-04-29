@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css" media="screen">
 
 <body ng-app="onlineRecApp">
-<div class="navbar navbar-inverse navbar-fixed-left">
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -25,12 +25,17 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#listCompanies">Home</a></li>
+              <li><a href="#listCompanies">List Companies</a>
+                <ul class="nav">
+                  <li><a href="#addCompany">Add Client</a></li>
+                </ul>
+              </li>
               <li><a href="#addCompany">Add Client</a></li>
               <li><a href="#listCompanies">List Companies</a></li>
               <li><a href="#addCandidate">Add Candidate</a></li>
               <li><a href="#listCandidates">List Candidate</a></li>
               <li><a href="#addSchedule">Add Schedule</a></li>
-              <li><a href="#addSchedule">List Schedule</a></li>
+              <li><a href="#listSchedules">List Schedule</a></li>
             </ul>
               
           </div><!--/.nav-collapse -->

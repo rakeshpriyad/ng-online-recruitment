@@ -33,19 +33,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.use(express.static('uploads'));
 
-
-
-/*------------------------------------------
-    connection peer, register as middleware
-    type koneksi : single,pool and request
--------------------------------------------*/
-
-
-
-
-
-//app.get('/', routes.index);
 
 app.get('/companies/get/:id', companies.get);
 app.get('/companies/:page', companies.list);
@@ -69,7 +58,7 @@ app.get('/candidates', candidates.list);
 app.get('/candidates/:page', candidates.list);
 app.post('/candidates/edit/:id',candidates.save_edit);
 app.get('/candidates/delete/:id', candidates.delete_candidate);
-app.get('/candidates/upload', candidates.upload);
+//app.get('/candidates/upload', candidates.upload);
 app.post('/candidates/upload', candidates.cv_upload);
 //app.get('/candidates/find', candidates.find);
 app.post('/candidates/find', candidates.find);
@@ -94,16 +83,39 @@ app.get('/companiesList', function(req, res) {
 })
 
 
+/*
+app.get('/', function(req, res) {
+  res.sendfile(path.join(clientDir, 'route.html'))
+})*/
 
-/*app.get('/', function(req, res) {
+
+app.get('/', function(req, res) {
   res.sendfile(path.join(clientDir, 'index.html'))
+})
+/*
+app.get('/upload', function(req, res) {
+  res.sendfile(path.join(clientDir, 'upload_cv.html'))
 })
 */
 
-app.get('/route', function(req, res) {
-  res.sendfile(path.join(clientDir, 'route.html'))
-})
+app.get('/download', candidates.download);
 
+
+var mime = require('mime');
+
+app.get('/download/:fileName', function(req, res){
+var fileName = req.params.fileName;
+  var file = __dirname + '/uploads/'+fileName;
+
+  var filename = path.basename(file);
+  var mimetype = mime.lookup(file);
+
+  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+  res.setHeader('Content-type', mimetype);
+
+  var filestream = fs.createReadStream(file);
+  filestream.pipe(res);
+});
 
 
 

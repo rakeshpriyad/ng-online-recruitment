@@ -25,15 +25,16 @@ exports.list = function(req, res){
 	
 	
 	scheduleProvider.fetchTotalSchedules(function(error, schedules) {
-		totalSchedules = schedules.length;
+		//totalSchedules = schedules.length;
+		res.send(schedules);
 	});
-	scheduleProvider.fetchAllSchedules(currentPage,function(error, schedules) {
+	/*scheduleProvider.fetchAllSchedules(currentPage,function(error, schedules) {
 			//res.render('schedules',{page_title:"Schedules ",data:schedules});
 			 
-			pageCount = Math.floor((totalSchedules/pageSize));
+			//pageCount = Math.floor((totalSchedules/pageSize));
 					
-			res.render('schedules',{page_title:"Schedule Information ",data:schedules,pageSize : pageSize, totalSchedules : totalSchedules,pageCount: pageCount,currentPage: currentPage});
-	});
+			//res.render('schedules',{page_title:"Schedule Information ",data:schedules,pageSize : pageSize, totalSchedules : totalSchedules,pageCount: pageCount,currentPage: currentPage});
+	});*/
 };
 
 

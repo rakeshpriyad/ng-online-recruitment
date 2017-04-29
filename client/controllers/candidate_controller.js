@@ -19,7 +19,7 @@ function CandidateListController ($scope, $http)
             function(data, status, headers, config)
             {
 
-                $scope.candidates = data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
+                $scope.candidates = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
 
                 if ( $scope.total == undefined )
                 {
@@ -36,6 +36,14 @@ function CandidateListController ($scope, $http)
                     }
                 }
 
+    });
+
+
+$http.get('/download').
+        success(
+            function(data, status, headers, config)
+            {
+                $scope.dir = data;
     });
 
 
@@ -76,21 +84,48 @@ $scope.loadPage = function (pg)
 
       }
 
-
-  $scope.hasPic = function()
-    {
-        if ($scope.wine.picture == undefined)
-        {
-            return false;
-        }
-
-        if( $scope.wine.picture != "")
-        {
-             return true ;
-        }
-
-    }
-
-
 }
 
+
+function EditCandidateController($scope, $http,$location,$routeParams) {
+
+    var candidate =
+    {
+        candidate_name: "",
+        qualification: "",
+        skills: "",
+        address: "",
+        email: "",
+        phone: ""
+    }
+
+    var picfile =
+    {
+        data: ""
+    }
+
+    $scope.candidate = candidate;
+    $scope.action = "Edit" ;
+
+    console.log ( " ID of the Candidate is " + $routeParams.id) ;
+
+
+    $http.get('/candidates/get/' + $routeParams.id).
+    success(
+    function(data, status, headers, config) {
+       $scope.candidate = data;
+    });
+
+
+    $scope.save = function()
+    {
+
+         $http.post('/candidates/edit/' + $routeParams.id, $scope.candidate).
+          success(
+            function(data) {
+            $location.url('http://localhost:4300/#/listCandidates');
+        });
+    }
+
+    
+}

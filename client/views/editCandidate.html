@@ -1,96 +1,49 @@
-<div class="row-fluid">
-
-<form class="form-horizontal span12">
-
-<fieldset>
-
-	<legend>
-		Online Recruitment
-	</legend>
-
-     <br/>
-
-            <div class="row">
-                <div class="span8">
-
-                    <div class="control-group">
-                        <label class="control-label">Name:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.name" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Year:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.year" type="text">
-                            <span class="help-inline"></span>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Grapes:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.grapes" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Region:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.region" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Country:</label>
-
-                        <div class="controls">
-                            <input data-ng-model="wine.country" type="text">
-                            <span class="help-inline"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Picture:</label>
-
-                        <div class="controls">
-                            <input type="file" file-Upload multiple/>
-                            <ul>
-                                <li ng-repeat="file in files">{{file.name}}</li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-		       </div>
-
-
-                
-
-
+<div ng-include="'header.html'"></div>
+<div id="wrapper">
+<div style="margin-left:30%;margin-top:5%;">
+<div class="page-data">
+            <div>
+                <table cellpadding="11">
+                <tr>
+                    <td>Name</td><td>: <input type="text" name="candidate_name" data-ng-model="candidate.candidate_name" required></td>
+                 </tr>
+                 <tr>
+                    <td>Qualification</td>
+                    <td valign="top">: 
+                        <input type="text" name="qualification" required cols="30" rows="5" data-ng-model="candidate.qualification"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Skills</td>
+                    <td valign="top">: 
+                        <input type="text" name="skills"  data-ng-model="candidate.skills"></textarea>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Address</td>
+                    <td valign="top">: 
+                        <textarea name="address" required cols="30" rows="5" data-ng-model="candidate.address"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td><td>: <input type="text" data-ng-model="candidate.email" name="email" required></td>
+                 </tr>
+                  <tr>
+                    <td>Phone</td><td>: <input type="text" name="phone" data-ng-model="candidate.phone"  required></td>
+                 </tr>
+                 <tr>
+                    <td></td>
+                    <td>
+                        &nbsp; <input type="submit" ng-click="save()" value="Save">
+                        
+                        
+                        
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                </table>
             </div>
- </fieldset>
-
-
-
-<div class="form-actions">
-    <button class="btn btn-primary save" ng-click="save()">Save</button>
-    <a href="/" class="btn">Cancel</a>
+            
+        </div>
 </div>
-
-</form>
-
 </div>

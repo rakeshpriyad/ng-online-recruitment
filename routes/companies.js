@@ -102,7 +102,7 @@ exports.save = function(req,res){
 			if (error) {
 				res.send(error, 500);
 			} else {
-				res.redirect('/route#/listCompanies');
+				res.redirect('/#/listCompanies');
 			}
 		});
 };
@@ -123,11 +123,11 @@ exports.save_edit = function(req,res){
 		console.log("Update Updating : %s ",input.name);
 
 			companyProvider.updateCompany(companies, function(error, cs) {
-				console.log("Error Updating : %s ",req.body );
+				console.log(" Updating : %s ",JSON.stringify(req.body) );
 				if (error)
 					console.log("Error Updating : %s ",err );
 
-				res.redirect('/companies');
+			//	res.redirect('/#listCompanies');
 
 			});
 

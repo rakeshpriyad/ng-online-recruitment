@@ -1,5 +1,5 @@
 
-function CandidateListController ($scope, $http)
+function ScheduleListController ($scope, $http)
 {
 
  //for pagination and searching
@@ -14,12 +14,12 @@ function CandidateListController ($scope, $http)
         }
 
 
-    $http.get('/candidates').
+    $http.get('/schedules').
         success(
             function(data, status, headers, config)
             {
 
-                $scope.candidates = data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
+                $scope.schedules = data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
 
                 if ( $scope.total == undefined )
                 {
@@ -53,7 +53,7 @@ $scope.loadPage = function (pg)
 
         $scope.offset = pg - 1;
 
-        $http.get('/candidates').
+        $http.get('/schedules').
             success(
             function(data, status, headers, config)
             {
@@ -69,28 +69,12 @@ $scope.loadPage = function (pg)
 
                 console.log("The end2 is " + end ) ;
 
-                $scope.candidates = data.slice($scope.offset*$scope.limit, end);
+                $scope.schedules = data.slice($scope.offset*$scope.limit, end);
 
 
            });
 
       }
-
-
-  $scope.hasPic = function()
-    {
-        if ($scope.wine.picture == undefined)
-        {
-            return false;
-        }
-
-        if( $scope.wine.picture != "")
-        {
-             return true ;
-        }
-
-    }
-
 
 }
 
