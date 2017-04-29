@@ -1,0 +1,81 @@
+<script src="/libs/angular.min.js"></script>
+<div ng-app="myApp" ng-controller="MyCtrl">
+    <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+    <select ng-model="pageSize" id="pageSize" class="form-control">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+     </select>
+    <ul>
+        <li ng-repeat="item in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+            {{item}}
+        </li>
+    </ul>
+    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+</div>
+<script>
+
+  var app=angular.module('myApp', []);
+
+// alternate - https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination
+// alternate - http://fdietz.github.io/recipes-with-angular-js/common-user-interface-patterns/paginating-through-client-side-data.html
+
+app.controller('MyCtrl', ['$scope', '$filter', function ($scope, $http,$filter) {
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.data = [];
+    $scope.q = '';
+    
+    $scope.getData = function () {
+      $http.get('/candidates').
+        success(
+            function(data, status, headers, config)
+            {
+
+                $scope.data = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
+
+                if ( $scope.total == undefined )
+                {
+                   $scope.total = data.length ;
+                }
+
+                if ( $scope.pageCount == undefined )
+                {
+                    $scope.pageCount = Math.floor($scope.total / $scope.limit)
+
+                    if ($scope.total % $scope.limit !== 0)
+                    {
+                        $scope.pageCount += 1 ;
+                    }
+                }
+
+    });
+
+    }
+    
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.getData().length/$scope.pageSize);                
+    }
+    
+    for (var i=0; i<65; i++) {
+        $scope.data.push("Item "+i);
+    }
+}]);
+
+//We already have a limitTo filter built-in to angular,
+//let's make a startFrom filter
+app.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
+
+</script>

@@ -2,12 +2,6 @@
 function CompanyListController ($scope, $http)
 {
 
-    $scope.currentPage = 0;
-    $scope.pageSize = 3;
-    $scope.data = [];
-    $scope.q = '';
-    var companies = {};
-    $scope.companies = companies;
  //for pagination and searching
 
         if ( $scope.limit == undefined )
@@ -26,7 +20,6 @@ function CompanyListController ($scope, $http)
             {
 
                 $scope.companies = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
-                $scope.numberOfPages  = Math.ceil(data.length/$scope.pageSize); 
 
                 if ( $scope.total == undefined )
                 {
@@ -44,9 +37,6 @@ function CompanyListController ($scope, $http)
                 }
 
     });
-
-   
-    
 
 
 

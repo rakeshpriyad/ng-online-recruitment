@@ -86,10 +86,10 @@ app.get('/companiesList', function(req, res) {
 })
 
 
-/*
-app.get('/', function(req, res) {
-  res.sendfile(path.join(clientDir, 'route.html'))
-})*/
+
+app.get('/test', function(req, res) {
+  res.sendfile(path.join(clientDir, 'test.html'))
+})
 
 
 app.get('/', function(req, res) {
