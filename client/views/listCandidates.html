@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-   <div ng-include="'header.html'"></div>
-<body>
+<div ng-include="'header.html'"></div>
 
 <div ng-app="onlineRecApp" ng-controller="CandidateListController"> 
 
@@ -23,6 +22,21 @@
                 </table>
             </div>
           </div>
+           <div class="control-group" style="margin-left:50%">
+            <table >
+                <tr>
+                    <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
+                    <td>
+                        <select ng-model="pageSize" id="pageSize" class="form-control">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+          </div>
           <div class="data-table">
             <table border="1" cellpadding="7" cellspacing="7">
                 <tr>
@@ -38,7 +52,7 @@
                     <th width="120px">Action</th>
                 </tr>
 
-              <tr ng-repeat="c in candidates">
+              <tr ng-repeat="c in candidates | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
                 <td>{{ c._id }}</td>
                 <td>{{ c.candidate_name }}</td>
                 <td>{{ c.qualification }}</td>
@@ -50,14 +64,18 @@
                 <td><a target="_self" href="/download/{{ c.candidate_name }}.docx" download="{{ c.candidate_name }}.docx">download</a></td>
                 <td>
                         <a class="a-inside edit" href="#editCandidate/{{ c._id }}">Edit</a>
-
                         <a class="a-inside delete" href="/candidates/delete/{{ c._id }}">Delete</a>
 
                     </td>
               </tr>
           </table>
         </div>
-
+        
+        <div class="data-btn" style="margin-left:30%">
+          <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
+            {{currentPage+1}}/{{candidates.length/pageSize }}
+          <button ng-disabled="currentPage >= candidates.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
+        </div>
 </div>
 
 

@@ -118,7 +118,7 @@ textarea{ border:1px solid #ddd;width:296px;}
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 .bg-img{
-    background-image: url("http://localhost:4300/images/banner2.jpe");
+    background-image: url("http://localhost:4300/libs/images/banner2.jpe");
     width:97%;
     height:100px;
 }

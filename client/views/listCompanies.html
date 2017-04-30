@@ -1,18 +1,5 @@
 <!DOCTYPE html>
-<html>
-  <head>
-        
-        <script src="/libs/angular.min.js"></script>
-        <script src="/controllers/controllers.js"></script>
-        <script src="/controllers/app.js"></script>
-        <script src="/controllers/directives.js"></script>
-        <script src="/controllers/filters.js"></script>
-        <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="/libs/css/style.css" media="screen">
-        
-  </head>
-
-<body>
+<div ng-include="'header.html'"></div>
 
 <div ng-app="onlineRecApp" ng-controller="CompanyListController"> 
 
@@ -50,7 +37,6 @@
                     </td>
                 </tr>
             </table>
-           
           </div>
           <div class="data-table">
             <table border="1" cellpadding="7" cellspacing="7">
@@ -82,9 +68,10 @@
         </div>
         <div class="data-btn" style="margin-left:30%">
           <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
-            {{currentPage+1}}/{{Math.ceil(companies.length/pageSize); }}
+            {{currentPage+1}}/{{companies.length/pageSize }}
           <button ng-disabled="currentPage >= companies.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
         </div>
+
 </div>
 </body>
 </html>

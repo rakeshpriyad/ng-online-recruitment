@@ -2,16 +2,11 @@
 function ScheduleListController ($scope, $http)
 {
 
- //for pagination and searching
-
-        if ( $scope.limit == undefined )
-        {
-            $scope.limit = 5 ;
-        }
-        if ( $scope.offset == undefined )
-        {
-            $scope.offset = 0 ;
-        }
+    $scope.currentPage = 0;
+    $scope.pageSize = 3;
+    $scope.data = [];
+    $scope.q = '';
+    
 
 
     $http.get('/schedules').
@@ -19,23 +14,8 @@ function ScheduleListController ($scope, $http)
             function(data, status, headers, config)
             {
 
-                $scope.schedules = data;//data.slice($scope.offset*$scope.limit, $scope.offset*$scope.limit + $scope.limit);
-
-                if ( $scope.total == undefined )
-                {
-                   $scope.total = data.length ;
-                }
-
-                if ( $scope.pageCount == undefined )
-                {
-                    $scope.pageCount = Math.floor($scope.total / $scope.limit)
-
-                    if ($scope.total % $scope.limit !== 0)
-                    {
-                        $scope.pageCount += 1 ;
-                    }
-                }
-
+                $scope.schedules = data;
+                $scope.numberOfPages  = Math.ceil(data.length/$scope.pageSize); 
     });
 
 
@@ -44,44 +24,20 @@ function ScheduleListController ($scope, $http)
 $scope.loadPage = function (pg)
     {
 
-     //for pagination and searching
-
-        if ( $scope.limit == undefined )
-        {
-            $scope.limit = 5 ;
-        }
-
-        $scope.offset = pg - 1;
-
+     
         $http.get('/schedules').
             success(
             function(data, status, headers, config)
             {
-
-                var end = $scope.offset*$scope.limit + $scope.limit ;
-
-                console.log("The end is " + end ) ;
-
-                if ( end >  $scope.total )
-                {
-                    end = $scope.total ;
-                }
-
-                console.log("The end2 is " + end ) ;
-
-                $scope.schedules = data.slice($scope.offset*$scope.limit, end);
-
-
+                $scope.schedules = data;
            });
-
       }
-
 }
 
 function EditScheduleController($scope, $http,$location,$routeParams) {
 
     var schedule = {schedule_name:"", address:"", company_name:"",candidate_name:"",contact_person:""};
-    
+    $scope.message = '';
     $scope.schedule = schedule;
     $scope.action = "Edit" ;
 
@@ -101,7 +57,8 @@ function EditScheduleController($scope, $http,$location,$routeParams) {
          $http.post('/schedules/edit/' + $routeParams.id, $scope.schedule).
           success(
             function(data) {
-            $location.url('http://localhost:4300/#/listSchedules');
+            //$location.url('http://localhost:4300/#/listSchedules');
+            message ="Success";
         });
     }
 

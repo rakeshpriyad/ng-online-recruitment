@@ -1,18 +1,14 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var mime = require('mime');
 
 //load companies route
 var companies = require('./routes/companies');
 var candidates = require('./routes/candidates');
 var schedules = require('./routes/schedules');
-const fs = require('fs');
+
 var app = express();
 
 
@@ -26,23 +22,18 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.static(path.join(__dirname, 'client')));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
 app.use(express.static('uploads'));
-
-
 app.get('/companies/get/:id', companies.get);
 app.get('/companies/:page', companies.list);
 app.get('/companies', companies.list);
 app.post('/companies/find', companies.find);
 app.get('/companies/find/:page/:company_name', companies.find);
-
-
 app.get('/companies/add', companies.add);
 app.post('/companies/add', companies.save);
 app.get('/companies/delete/:id', companies.delete_company);
@@ -58,53 +49,28 @@ app.get('/candidates', candidates.list);
 app.get('/candidates/:page', candidates.list);
 app.post('/candidates/edit/:id',candidates.save_edit);
 app.get('/candidates/delete/:id', candidates.delete_candidate);
-//app.get('/candidates/upload', candidates.upload);
 app.post('/candidates/upload', candidates.cv_upload);
-//app.get('/candidates/find', candidates.find);
 app.post('/candidates/find', candidates.find);
 app.post('/candidates/find/', candidates.find);
 app.get('/candidates/find/:page/:candidate_name', candidates.find);
-
-
 app.get('/schedules/add', schedules.add);
 app.get('/schedules/get/:id', schedules.get);
 app.post('/schedules/add', schedules.save);
 app.get('/schedules/edit/:id', schedules.edit);
 app.post('/schedules/edit/:id',schedules.save_edit);
-
 app.get('/schedules', schedules.list);
 app.get('/schedules/:page', schedules.list);
-
 app.post('/schedules/find', schedules.find);
 app.get('/schedules/find/:page/:schedule_name', schedules.find);
 app.get('/schedules/delete/:id', schedules.delete_schedule);
 
 var clientDir = path.join(__dirname, 'client')
 
-app.get('/companiesList', function(req, res) {
-  res.sendfile(path.join(clientDir, 'companies.html'))
-})
-
-
-
-app.get('/test', function(req, res) {
-  res.sendfile(path.join(clientDir, 'test.html'))
-})
-
-
 app.get('/', function(req, res) {
   res.sendfile(path.join(clientDir, 'index.html'))
 })
-/*
-app.get('/upload', function(req, res) {
-  res.sendfile(path.join(clientDir, 'upload_cv.html'))
-})
-*/
 
 app.get('/download', candidates.download);
-
-
-var mime = require('mime');
 
 app.get('/download/:fileName', function(req, res){
 var fileName = req.params.fileName;

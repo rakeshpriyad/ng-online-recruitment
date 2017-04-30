@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<html>
-  <head>
-        
-        <script src="/libs/angular.min.js"></script>
-
-        <script src="/controllers/controllers.js"></script>
-        <script src="/controllers/app.js"></script>
-        <script src="/controllers/directives.js"></script>
-        <script src="/controllers/filters.js"></script>
-        <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="/libs/css/style.css" media="screen">
-    </head>
-<body>
+<div ng-include="'header.html'"></div>
 
 <div ng-app="onlineRecApp" ng-controller="ScheduleListController"> 
 
@@ -38,11 +26,25 @@
                 </table>
             </div>
           </div>
+          <div class="control-group" style="margin-left:50%">
+            <table >
+                <tr>
+                    <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
+                    <td>
+                        <select ng-model="pageSize" id="pageSize" class="form-control">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+          </div>
           <div class="data-table">
             <table border="1" cellpadding="7" cellspacing="7">
-                                <tr>
-                    
-					          <th width="50px">ID</th>
+                <tr>
+                    <th width="50px">ID</th>
                     <th>Schedule Name</th>
                     <th>Address</th>
                     <th>Company Name</th>
@@ -52,7 +54,7 @@
                 </tr>
 
 
-              <tr ng-repeat="schedule in schedules">
+              <tr ng-repeat="schedule in schedules | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
                 <td>{{ schedule._id }}</td>
                 <td>{{ schedule.schedule_name }}</td>
                 <td>{{ schedule.address }}</td>
@@ -60,15 +62,17 @@
                 <td>{{ schedule.candidate_name }}</td>
                 <td>{{ schedule.contact_person }}</td>
                 <td>
-                        <a class="a-inside edit" href="#editSchedule/{{ schedule._id }}">Edit</a>
-
-                        <a class="a-inside delete" href="/schedules/delete/{{ schedule._id }}">Delete</a>
-
-                    </td>
+                  <a class="a-inside edit" href="#editSchedule/{{ schedule._id }}">Edit</a>
+                  <a class="a-inside delete" href="/schedules/delete/{{ schedule._id }}">Delete</a>
+                </td>
               </tr>
           </table>
         </div>
-
+        <div class="data-btn" style="margin-left:30%">
+          <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
+            {{currentPage+1}}/{{schedules.length/pageSize }}
+          <button ng-disabled="currentPage >= schedules.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
+        </div>
 </div>
 
 </body>
