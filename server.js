@@ -53,7 +53,7 @@ app.post('/candidates/upload', candidates.cv_upload);
 app.post('/candidates/find', candidates.find);
 app.post('/candidates/find/', candidates.find);
 app.get('/candidates/find/:page/:candidate_name', candidates.find);
-//app.get('/schedules/add', schedules.add);
+
 app.get('/schedules/get/:id', schedules.get);
 app.post('/schedules/add', schedules.save);
 app.get('/schedules/edit/:id', schedules.edit);
