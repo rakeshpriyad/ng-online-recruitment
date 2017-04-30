@@ -74,7 +74,7 @@ function EditCandidateController($scope, $http,$location,$routeParams) {
          $http.post('/candidates/edit/' + $routeParams.id, $scope.candidate).
           success(
             function(data) {
-            $location.url('http://localhost:4300/#/listCandidates');
+            $location.url('/listCandidates');
         });
     }
 

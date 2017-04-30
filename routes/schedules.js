@@ -93,7 +93,8 @@ exports.save = function(req,res){
 			if (error) {
 				res.send(error, 500);
 			} else {
-				res.redirect('/schedules');
+				//res.redirect('/schedules');
+				res.send(200);
 			}
 		});
 };
@@ -115,11 +116,12 @@ exports.save_edit = function(req,res){
 		console.log("Update Updating : %s ",input.schedule_name);
 
 			scheduleProvider.updateSchedule(schedules, function(error, cs) {
-				console.log("Error Updating : %s ",req.body );
+				console.log(" Updating : %s ",JSON.stringify(req.body));
 				if (error)
 					console.log("Error Updating : %s ",err );
 
 				//res.redirect('/#listSchedules');
+				res.send(200);
 
 			});
 

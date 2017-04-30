@@ -8,8 +8,6 @@ function ScheduleListController ($scope, $http)
     $scope.q = '';
     $scope.Math = window.Math;
     
-
-
     $http.get('/schedules').
         success(
             function(data, status, headers, config)
@@ -19,13 +17,8 @@ function ScheduleListController ($scope, $http)
                 $scope.numberOfPages  = Math.ceil(data.length/$scope.pageSize); 
     });
 
-
-
-
 $scope.loadPage = function (pg)
     {
-
-     
         $http.get('/schedules').
             success(
             function(data, status, headers, config)
@@ -44,7 +37,6 @@ function EditScheduleController($scope, $http,$location,$routeParams) {
 
     console.log ( " ID of the schedule is " + $routeParams.id) ;
 
-
     $http.get('/schedules/get/' + $routeParams.id).
     success(
     function(data, status, headers, config) {
@@ -58,10 +50,7 @@ function EditScheduleController($scope, $http,$location,$routeParams) {
          $http.post('/schedules/edit/' + $routeParams.id, $scope.schedule).
           success(
             function(data) {
-            //$location.url('http://localhost:4300/#/listSchedules');
-            message ="Success";
+            $location.path('/listSchedules');
         });
     }
-
-    
 }

@@ -113,14 +113,12 @@ exports.save_edit = function(req,res){
     console.log("Update Updating : %s ",id);
     console.log("Update Updating : %s ",input.company_name);
 
-			companyProvider.updateCompany(companies, function(error, cs) {
-				console.log(" Updating : %s ",JSON.stringify(req.body) );
-				if (error)
-					console.log("Error Updating : %s ",err );
-
-			//	res.redirect('/#listCompanies');
-
-			});
+	companyProvider.updateCompany(companies, function(error, cs) {
+		console.log(" Updating : %s ",JSON.stringify(req.body) );
+		if (error)
+			console.log("Error Updating : %s ",err );
+		res.send(200);
+	});
 
 };
 

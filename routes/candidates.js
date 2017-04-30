@@ -111,18 +111,16 @@ exports.save_edit = function(req,res){
 			contact_person    : input.contact_person
 
         };
-    console.log("Update : %s ",id);
-	console.log("Updating : %s ",JSON.stringify(candidates));
+    	console.log("Update : %s ",id);
+		console.log("Updating : %s ",JSON.stringify(candidates));
 
-			candidateProvider.updateCandidate(candidates, function(error, cs) {
-				//console.log("Updating : %s ",input);
-				if (error)
-					console.log("Error Updating : %s ",err );
+		candidateProvider.updateCandidate(candidates, function(error, cs) {
+			if (error)
+				console.log("Error Updating : %s ",err );
 
-				//res.redirect('/candidates');
-				console.log("Updated successfully");
-
-			});
+			console.log("Updated successfully");
+			res.send(200);
+		});
 
 };
 

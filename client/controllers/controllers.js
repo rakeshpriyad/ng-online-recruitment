@@ -58,7 +58,7 @@ function EditCompanyController($scope, $http,$location,$routeParams) {
         $http.post('/companies/edit/' + $routeParams.id, $scope.company).
           success(
             function(data) {
-            $location.url('/#/listCompanies');
+            $location.url('/listCompanies');
         });
     }
 }
