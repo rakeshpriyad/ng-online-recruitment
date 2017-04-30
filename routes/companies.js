@@ -1,9 +1,3 @@
-
-
-var pageSize = 2,
-	pageCount = 10/2,
-	currentPage = 1	;
-
 function getCompanyProvider(){
 	var mongoServer = 'localhost';
 	var mongoPort = 27017;
@@ -22,11 +16,6 @@ exports.list = function(req, res){
 		res.send(companies);
     });
 	
-};
-
- 
-exports.addCompany = function(req, res){
-  res.render('addCompany',{page_title:"Add Companies "});
 };
 
 exports.get = function(req, res){
@@ -68,19 +57,6 @@ exports.find = function(req, res){
 
 };
 
-
-exports.add = function(req, res){
-  res.render('add_company',{page_title:"Add Companies "});
-};
-
-exports.edit = function(req, res){
-
-    var id = req.params.id;
-	companyProvider.fetchCompanyById(req.params.id, function(error, company) {
-				res.render('edit_company',{page_title:"Edit Companies ",company});
-		});
-};
-
 /*Save the company*/
 exports.save = function(req,res){
 
@@ -107,8 +83,6 @@ exports.save_edit = function(req,res){
             email   		: input.email,
             phone   		: input.phone,
 			contact_person  : input.contact_person
-
-
         };
     console.log("Update Updating : %s ",id);
     console.log("Update Updating : %s ",input.company_name);
@@ -119,14 +93,9 @@ exports.save_edit = function(req,res){
 			console.log("Error Updating : %s ",err );
 		res.send(200);
 	});
-
 };
 
-
 exports.delete_company = function(req,res){
-
-     var id = req.params.id;
-
 	companyProvider.deleteCompany(req.params.id, function(error, companies) {
 			if (error) {
 				res.send(error, 404);
@@ -134,5 +103,4 @@ exports.delete_company = function(req,res){
 				res.redirect('/#listCompanies');
 			}
 		});
-
 };

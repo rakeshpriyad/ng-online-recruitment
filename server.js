@@ -34,16 +34,15 @@ app.get('/companies/:page', companies.list);
 app.get('/companies', companies.list);
 app.post('/companies/find', companies.find);
 app.get('/companies/find/:page/:company_name', companies.find);
-app.get('/companies/add', companies.add);
+
 app.post('/companies/add', companies.save);
 app.get('/companies/delete/:id', companies.delete_company);
-app.get('/companies/edit/:id', companies.edit);
 app.post('/companies/edit/:id',companies.save_edit);
 
 
-app.get('/candidates/add', candidates.add);
+
 app.post('/candidates/add', candidates.save);
-app.get('/candidates/edit/:id', candidates.edit);
+
 app.get('/candidates/get/:id', candidates.get);
 app.get('/candidates', candidates.list);
 app.get('/candidates/:page', candidates.list);

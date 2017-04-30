@@ -2,9 +2,6 @@
 
 
 var formidable = require('formidable');
-var pageSize = 2,
-	pageCount = 10/2,
-	currentPage = 1	;
 
 function getCandidateProvider(){
 	var mongoServer = 'localhost';
@@ -19,19 +16,10 @@ var candidateProvider =  getCandidateProvider();
  * GET candidates listing.
  */
 exports.list = function(req, res){
-		var currentPage = req.params.page;
-		  if ( typeof currentPage == 'undefined' )  {
-				currentPage =1;
-			}
-		candidateProvider.fetchAllCandidates(currentPage, function(error, candiates) {
-			var totalCandidates = candiates.length;
-			pageCount = totalCandidates/pageSize;
-			//res.render('candidates',{page_title:"Candidate Information ",candidates_data:candiates,pageSize: pageSize,	totalCandidates: totalCandidates,pageCount: pageCount,currentPage: currentPage});
-       		res.send(candiates);
-
-			});
+	candidateProvider.fetchAllCandidates(function(error, candiates) {
+		res.send(candiates);
+	});
 };
-
 
 exports.get = function(req, res){
 		candidateProvider.fetchCandidateById(req.params.id, function(error, candidate) {
@@ -60,7 +48,6 @@ exports.find = function(req, res){
 				if (candiates == null) {
 					res.send(error, 404);
 				} else {
-					//res.send(candidates);
 					var totalCandidates = candiates.length;
 					pageCount = totalCandidates/pageSize;
 					res.render('candidates',{page_title:"Candidate Information",candidates_data:candiates,cand_name:search_param,pageSize: pageSize,	totalCandidates: totalCandidates,pageCount: pageCount,currentPage: currentPage});
@@ -68,18 +55,6 @@ exports.find = function(req, res){
 			});
 
 		};
-
-exports.add = function(req, res){
-  res.render('add_candidate',{page_title:"Add Candidates "});
-};
-
-exports.edit = function(req, res){
-
-    var id = req.params.id;
-	candidateProvider.fetchCandidateById(req.params.id, function(error, candidate) {
-				res.render('edit_candidate',{page_title:"Edit Candidates ",candidate});
-		});
-};
 
 /*Save the candidate*/
 exports.save = function(req,res){
@@ -126,9 +101,6 @@ exports.save_edit = function(req,res){
 
 
 exports.delete_candidate = function(req,res){
-
-     var id = req.params.id;
-
 	candidateProvider.deleteCandidate(req.params.id, function(error, candidates) {
 			if (error) {
 				res.send(error, 404);
@@ -136,18 +108,14 @@ exports.delete_candidate = function(req,res){
 				res.redirect('/#listCandidates');
 			}
 		});
-
 };
 
 exports.upload = function(req, res){
   res.render('upload_cv',{page_title:"Upload CV "});
 };
 exports.download = function(req, res){
-
   res.send({dir: __dirname + '/../uploads'});
 };
-
-
 
 exports.cv_upload = function(req, res){
  var form = new formidable.IncomingForm();
@@ -164,6 +132,5 @@ exports.cv_upload = function(req, res){
 	var path = require('path');
 	var clientDir = path.join(__dirname, '/../client')
     console.log("File Successfully uploaded!");
-	
-	 res.sendfile(path.join(clientDir, 'upload_success.html'))
+    res.sendfile(path.join(clientDir, 'upload_success.html'))
 };

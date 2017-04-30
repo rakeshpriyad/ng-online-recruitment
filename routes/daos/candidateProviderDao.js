@@ -8,7 +8,7 @@ CandidateProvider = function(host, port) {
 
 	this.db = new Db('candidates', new Server(host, port));
 	this.db.open(function(){});
-	this.fetchAllCandidates = function(page,cb) {
+	this.fetchAllCandidates = function(cb) {
 		this.db.collection(candidatesTable, function(error, candidates) {
 			if (error) {
 				cb(error, null);
