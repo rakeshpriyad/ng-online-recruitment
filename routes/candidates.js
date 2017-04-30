@@ -91,7 +91,7 @@ exports.save = function(req,res){
 			if (error) {
 				res.send(error, 500);
 			} else {
-				res.redirect('/route#/listCandidates');
+				res.redirect('/#/listCandidates');
 			}
 		});
 };

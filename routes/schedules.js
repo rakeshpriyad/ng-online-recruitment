@@ -1,8 +1,5 @@
 
 
-var pageSize = 3,
-	pageCount = 10/2,
-	currentPage = 1	;
 	
 function getScheduleProvider(){
 	var mongoServer = 'localhost';
@@ -17,15 +14,7 @@ var scheduleProvider =  getScheduleProvider();
  * GET schedules listing.
  */
 exports.list = function(req, res){
-	var currentPage = req.params.page;
-		  if ( typeof currentPage == 'undefined' )  {
-				currentPage =1;
-			}
-	var totalSchedules=0;
-	
-	
 	scheduleProvider.fetchTotalSchedules(function(error, schedules) {
-		//totalSchedules = schedules.length;
 		res.send(schedules);
 	});
 	
@@ -62,17 +51,12 @@ exports.find = function(req, res){
 				if (schedules == null) {
 					res.send(error, 404);
 				} else {
-					//res.send(schedules);
 					var totalSchedules = schedules.length;
 					pageCount = parseInt(totalSchedules)/parseInt(pageSize);
 					res.render('schedules',{page_title:"Company Information",data:schedules,shed_name:search_param,pageSize: pageSize,	totalSchedules: totalSchedules,pageCount: pageCount,currentPage: currentPage});
 				}
 			});
 
-};
-
-exports.add = function(req, res){
-  res.render('add_schedule',{page_title:"Add Schedules "});
 };
 
 exports.edit = function(req, res){
@@ -93,8 +77,7 @@ exports.save = function(req,res){
 			if (error) {
 				res.send(error, 500);
 			} else {
-				//res.redirect('/schedules');
-				res.send(200);
+			   res.redirect('/#/listSchedules');
 			}
 		});
 };
@@ -119,25 +102,16 @@ exports.save_edit = function(req,res){
 				console.log(" Updating : %s ",JSON.stringify(req.body));
 				if (error)
 					console.log("Error Updating : %s ",err );
-
-				//res.redirect('/#listSchedules');
 				res.send(200);
-
 			});
-
 };
 
-
 exports.delete_schedule = function(req,res){
-
-     var id = req.params.id;
-
-	scheduleProvider.deleteSchedule(req.params.id, function(error, schedules) {
+     scheduleProvider.deleteSchedule(req.params.id, function(error, schedules) {
 			if (error) {
 				res.send(error, 404);
 			} else {
 				res.redirect('/#listSchedules');
 			}
 		});
-
 };
