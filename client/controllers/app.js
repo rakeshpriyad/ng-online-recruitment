@@ -33,6 +33,10 @@ OnlineRecApp.config(function($routeProvider, $locationProvider) {
     .when("/upload", {controller:CVUploadController,
         templateUrl : '/upload_cv.html'
     })
+    .when("/Login", {controller: CompanyListController,   templateUrl : '/login.html'
+    })
+    .when("/SignUp", {controller: CompanyListController,   templateUrl : '/SignUp.html'
+    })
 })
 
 

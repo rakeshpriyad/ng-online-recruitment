@@ -1,0 +1,37 @@
+<div ng-include="'header.html'"></div>
+<div id="wrapper">
+<div style="margin-left:30%;margin-top:5%;">
+ <div class="page-data">
+            
+            <form method="post" action="/users/add">
+                <table cellpadding="11">
+                <tr>
+                    <td>User Name</td><td>: <input type="text" name="users_name" required></td>
+                 </tr>
+                 <tr>
+                    <td>Password</td><td>: <input type="password" name="password" required></td>
+                 </tr>
+                 <tr>
+                    <td>Address</td><td valign="top">: <textarea name="address" required cols="30" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Email</td><td>: <input type="text" name="email" required></td>
+                 </tr>
+                  <tr>
+                    <td>Phone</td><td>: <input type="text" name="phone" required></td>
+                 </tr>
+                
+                 <tr>
+                    <td >&nbsp;</td>
+                    <td>
+                        &nbsp; <input type="submit" name="submit" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                  
+                </table>
+            </form>
+            
+        </div>
+       </div>
+       </div>

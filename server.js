@@ -8,6 +8,7 @@ var mime = require('mime');
 var companies = require('./routes/companies');
 var candidates = require('./routes/candidates');
 var schedules = require('./routes/schedules');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -34,12 +35,9 @@ app.get('/companies/:page', companies.list);
 app.get('/companies', companies.list);
 app.post('/companies/find', companies.find);
 app.get('/companies/find/:page/:company_name', companies.find);
-
 app.post('/companies/add', companies.save);
 app.get('/companies/delete/:id', companies.delete_company);
 app.post('/companies/edit/:id',companies.save_edit);
-
-
 
 app.post('/candidates/add', candidates.save);
 
@@ -65,9 +63,7 @@ app.get('/schedules/delete/:id', schedules.delete_schedule);
 
 var clientDir = path.join(__dirname, 'client')
 
-app.get('/', function(req, res) {
-  res.sendfile(path.join(clientDir, 'index.html'))
-})
+
 
 app.get('/download', candidates.download);
 
@@ -85,8 +81,14 @@ var fileName = req.params.fileName;
   filestream.pipe(res);
 });
 
-
-
+app.get('/', function(req, res) {
+  res.sendfile(path.join(clientDir, 'home.html'))
+});
+app.get('/home', function(req, res) {
+  res.sendfile(path.join(clientDir, 'online-recruitment.html'))
+});
+app.post('/users/add', users.save);
+app.post('/users/login', users.login);
 
 
 

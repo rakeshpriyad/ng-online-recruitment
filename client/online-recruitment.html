@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<script src="/libs/angular.min.js"></script>
+
+<script src="/controllers/controllers.js"></script>
+<script src="/controllers/candidate_controller.js"></script>
+<script src="/controllers/schedule_controller.js"></script>
+<script src="/controllers/upload_controller.js"></script>
+
+
+<script src="/controllers/app.js"></script>
+<script src="/controllers/directives.js"></script>
+<script src="/controllers/filters.js"></script>
+<link rel="stylesheet" href="/libs/css/style.css" media="screen">
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css"
+	media="screen">
+
+<body ng-app="onlineRecApp">
+	<div class="menu" style="background-color: #62c462;">
+		<div class="dropdown" style="margin-left: 20px;">
+			<button class="dropbtn">
+				<a href="#listCompanies">Home</a>
+			</button>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn">Companies</button>
+			<div class="dropdown-content">
+				<a href="#addCompany">Add Client</a> <a href="#listCompanies">View
+					Companies</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn">Candidate</button>
+			<div class="dropdown-content">
+				<a href="#addCandidate">Add Candidate</a>
+				<a href="#listCandidates">View Candidates</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn">Schedule</button>
+			<div class="dropdown-content">
+				<a href="#addSchedule">Add Schedule</a>
+				<a href="#listSchedules">View Schedule</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn">
+				<a href="#upload">File Upload</a>
+			</button>
+		</div>
+	</div>
+	<div id="wrapper">
+
+		<div class="page-container">
+			<div class="page-header bg-img">
+				<h2>Online Recruitment System</h2>
+			</div>
+			<div ng-view></div>
+		</div>
+	</div>
+
+
+</body>
+</html>
