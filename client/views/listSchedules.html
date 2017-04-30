@@ -11,23 +11,8 @@
              <button>Schedule Information </button>
             </div>
             <div class="page-data">
-            <div class="search-info-btn">
-            <div class="data-btn">
-                <table border="0" width="100%">
-                  <tr>
-                    
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="50%" align="right">
-                    <form method="POST" action="/candidates/find">Schedule Name <input type="text" name="schedule_name" >  <input type="submit" value="Search"/> </form>
-                    </td>
-                  </tr>
-                </table>
-            </div>
-          </div>
           <div class="control-group" style="margin-left:50%">
-            <table >
+            <table>
                 <tr>
                     <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
                     <td>
@@ -52,7 +37,6 @@
                     <th>Contact Person</th>
                     <th width="120px">Action</th>
                 </tr>
-
 
               <tr ng-repeat="schedule in schedules | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
                 <td>{{ schedule._id }}</td>
