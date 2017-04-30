@@ -10,3 +10,10 @@ OnlineRecApp.filter('startFrom', function() {
         return input.slice(start);
     }
 });
+
+
+OnlineRecApp.filter('roundup', function () {
+        return function (value) {
+            return Math.ceil(value);
+        };
+    })

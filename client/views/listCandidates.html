@@ -10,9 +10,9 @@
             <div class="data-header-btn">
              <button>Candidate Information </button>
             </div>
-            <div class="page-data">
+          <div class="page-data">
             
-           <div class="control-group" style="margin-left:50%">
+           <div class="control-group" style="margin-left:56%">
             <table >
                 <tr>
                     <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
@@ -63,11 +63,9 @@
         
         <div class="data-btn" style="margin-left:30%">
           <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
-            {{currentPage+1}}/{{candidates.length/pageSize }}
+            {{currentPage+1}}/{{candidates.length/pageSize | roundup }}
           <button ng-disabled="currentPage >= candidates.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
         </div>
 </div>
-
-
 </body>
 </html>

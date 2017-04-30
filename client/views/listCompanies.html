@@ -10,8 +10,8 @@
             </div>
             <div class="page-data">
             
-          <div class="control-group" style="margin-left:50%">
-            <table >
+          <div class="control-group" style="margin-left:56%">
+            <table>
                 <tr>
                     <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
                     <td>
@@ -46,16 +46,14 @@
                 <td>{{ c.contact_person }}</td>
                 <td>
                         <a class="a-inside edit" href="#editCompany/{{ c._id }}">Edit</a>
-
                         <a class="a-inside delete" href="/companies/delete/{{ c._id }}">Delete</a>
-
-                    </td>
+                 </td>
               </tr>
           </table>
         </div>
         <div class="data-btn" style="margin-left:30%">
           <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
-            {{currentPage+1}}/{{companies.length/pageSize }}
+            {{currentPage+1}}/{{companies.length/pageSize | roundup }}
           <button ng-disabled="currentPage >= companies.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
         </div>
 

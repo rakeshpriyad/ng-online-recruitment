@@ -11,7 +11,7 @@
              <button>Schedule Information </button>
             </div>
             <div class="page-data">
-          <div class="control-group" style="margin-left:50%">
+          <div class="control-group" style="margin-left:56%">
             <table>
                 <tr>
                     <td valign="top"><input ng-model="q" id="search" class="form-control" placeholder="Filter text"></td>
@@ -54,8 +54,8 @@
         </div>
         <div class="data-btn" style="margin-left:30%">
           <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous </button>
-            {{currentPage+1}}/{{schedules.length/pageSize }}
-          <button ng-disabled="currentPage >= schedules.length/pageSize - 1" ng-click="currentPage=currentPage+1"> Next </button>
+            {{currentPage+1}}/{{schedules.length/pageSize  | roundup }}
+          <button ng-disabled="currentPage >= Math.floor(schedules.length/pageSize) - 1" ng-click="currentPage=currentPage+1"> Next </button>
         </div>
 </div>
 

@@ -6,6 +6,7 @@ function ScheduleListController ($scope, $http)
     $scope.pageSize = 3;
     $scope.data = [];
     $scope.q = '';
+    $scope.Math = window.Math;
     
 
 

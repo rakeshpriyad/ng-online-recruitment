@@ -136,9 +136,13 @@ textarea{ border:1px solid #ddd;width:296px;}
 .dropdown {
     position: relative;
     display: inline-block;
-    
+    margin-left: -10px;
 }
 
+.dropdown a{
+    text-decoration: none;
+    color: white;
+}
 .dropdown-content {
     display: none;
     position: absolute;
